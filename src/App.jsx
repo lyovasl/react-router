@@ -1,14 +1,51 @@
-import { Link, Route, Routes } from "react-router-dom";
+import { Link, Route, Routes, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
-import BookList from "./pages/BookList";
-import Book from "./pages/Book";
-import NewBook from "./pages/NewBook";
 import NotFound from "./pages/NotFound";
-import BookLayout from "./BookLayout";
+import RoutesBook from "./RoutesBook";
+import "./style.css";
 
 const App = () => {
+  const location = useLocation();
+  console.log(location, "=+");
   return (
     <>
+      {/* //ToDo Navlink */}
+
+      {/* <nav>
+        <ul>
+          <li>
+            <NavLink
+              style={({ isActive }) => {
+                return isActive ? { color: "green" } : {};
+              }}
+              to="/"
+            >
+              {({ isActive }) => {
+                return isActive ? "Active Home" : "Home";
+              }}
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/books">Books</NavLink>
+          </li>
+        </ul>
+      </nav> */}
+      {/* //ToDo Navlink */}
+
+      {/* <nav>
+        <ul>
+          <li>
+            <NavLink to="/">Home</NavLink>
+          </li>
+          <li>
+            <NavLink end to="/books">
+              Books
+            </NavLink>
+          </li>
+        </ul>
+      </nav> */}
+
+      {/* //* Link  */}
       <nav>
         <ul>
           <li>
@@ -19,17 +56,12 @@ const App = () => {
           </li>
         </ul>
       </nav>
+      {/* //* Link */}
+      {location.state}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/books" element={<BookLayout />}>
-          <Route index element={<BookList />} />
-          <Route path=":id" element={<Book />} />
-          <Route path="new" element={<NewBook />} />
-        </Route>
-        {/* <Route path="/books" element={<BookList />} />
-        <Route path="/books/:id" element={<Book />} />
-        <Route path="/books/new" element={<NewBook />} />
-        <Route path="*" element={<NotFound />} /> */}
+        <Route path="/books/*" element={<RoutesBook />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );
